@@ -21,5 +21,17 @@ public class TransactionRepositoryImpl implements TransactionRepository {
     public void saveTransaction(Transaction transaction) {
         transactions.add(transaction);
     }
+
+    @Override
+    public Transaction getTransactionById(String transactionId) {
+        
+        for (Transaction transaction : transactions) {
+            if (transaction.getTransactionId().equals(transactionId)) {
+                return transaction;
+            }
+        }
+        
+        throw new RuntimeException("Transaction not found");
+    }
     
 }

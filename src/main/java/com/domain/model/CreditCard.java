@@ -2,6 +2,12 @@ package com.domain.model;
 
 import java.util.Objects;
 
+/**
+ * CreditCard is a Value Object. It doesn't have setters because
+ * value objects are immutable. When checking its equality to other 
+ * instances of the same type, all of its values are compared, hence
+ * the need to override the `equals` and `hashCode` methods.
+ */
 public class CreditCard {
 
     private String creditCardNumber;

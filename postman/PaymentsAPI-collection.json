@@ -17,7 +17,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"amount\": 100,\n    \"currency\": \"{{$randomCurrencyCode}}\",\n    \"creditCardNumber\": \"{{$randomCreditCardMask}}\",\n    \"creditCardExpiration\": \"11/22\",\n    \"creditCardSecurityCode\": \"123\",\n    \"cardHolderName\": \"{{$randomFullName}}\"\n}"
+					"raw": "{\n    \"amount\": {{$randomInt}},\n    \"currency\": \"{{$randomCurrencyCode}}\",\n    \"creditCardNumber\": \"{{$randomCreditCardMask}}{{$randomCreditCardMask}}{{$randomCreditCardMask}}{{$randomCreditCardMask}}\",\n    \"creditCardExpiration\": \"11/22\",\n    \"creditCardSecurityCode\": \"{{$randomCreditCardMask}}\",\n    \"cardHolderName\": \"{{$randomFullName}}\"\n}"
 				},
 				"url": {
 					"raw": "{{baseUrl}}/payments",
@@ -58,6 +58,66 @@
 					"header": null,
 					"cookie": [],
 					"body": null
+				}
+			]
+		},
+		{
+			"name": "Fetch payment transaction by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/payments/:transactionId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"payments",
+						":transactionId"
+					],
+					"variable": [
+						{
+							"key": "transactionId",
+							"value": "f4bc9296-6938-4250-b3ac-957a60796567",
+							"type": "string",
+							"description": "(Required) Id of the transaction"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Information about the payment transaction",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/payments/:transactionId",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"payments",
+								":transactionId"
+							],
+							"variable": [
+								{
+									"key": "transactionId"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n \"transactionId\": \"voluptate aliquip irure occaecat officia\",\n \"timestamp\": \"ad commodo proident adipisicing\",\n \"amount\": -40956162.31284151,\n \"currency\": \"pariatur\",\n \"creditCardNumber\": \"cupidatat velit ex\",\n \"creditCardExpiration\": \"ut minim in velit cillum\",\n \"creditCardSecurityCode\": \"sed reprehenderit pariatur ex in\",\n \"cardHolderName\": \"Lorem consectetur nisi elit\"\n}"
 				}
 			]
 		}
