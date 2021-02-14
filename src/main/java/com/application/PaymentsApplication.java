@@ -32,6 +32,7 @@ public class PaymentsApplication {
         
         TransactionInfo transactionInfo = new TransactionInfo();
         transactionInfo.setAmount(transaction.getAmount());
+        transactionInfo.setCurrency(transaction.getCurrency().getCurrencyCode());
         transactionInfo.setTimestamp(transaction.getTimestamp().toString());
         transactionInfo.setTransactionId(transaction.getTransactionId());
         transactionInfo.setCreditCardNumber(transaction.getCreditCard().getCreditCardNumber());
