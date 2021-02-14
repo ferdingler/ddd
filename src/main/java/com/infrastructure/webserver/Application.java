@@ -1,4 +1,4 @@
-package com.infrastructure;
+package com.infrastructure.webserver;
 
 import io.micronaut.runtime.Micronaut;
 

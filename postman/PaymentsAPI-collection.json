@@ -1,0 +1,91 @@
+{
+	"info": {
+		"_postman_id": "c86c06d1-185c-4c12-bac0-8b63837d51e7",
+		"name": "Payment API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Submit a new payment transaction",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": 100,\n    \"currency\": \"{{$randomCurrencyCode}}\",\n    \"creditCardNumber\": \"{{$randomCreditCardMask}}\",\n    \"creditCardExpiration\": \"11/22\",\n    \"creditCardSecurityCode\": \"123\",\n    \"cardHolderName\": \"{{$randomFullName}}\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/payments",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"payments"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Submit a new payment transaction",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"amount\": 100,\n    \"currency\": \"{{$randomCurrencyCode}}\",\n    \"creditCardNumber\": \"{{$randomCreditCardMask}}\",\n    \"creditCardExpiration\": \"11/22\",\n    \"creditCardSecurityCode\": \"123\",\n    \"cardHolderName\": \"{{$randomFullName}}\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/payments",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"payments"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://8080-peach-kingfisher-comvozzv.ws-us03.gitpod.io"
+		}
+	]
+}
