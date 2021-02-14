@@ -7,9 +7,18 @@ public class Transaction {
     private String transactionId;
     private Date timestamp;
     private double amount;
+    private CreditCard creditCard;
 
     public String getTransactionId() {
         return transactionId;
+    }
+
+    public CreditCard getCreditCard() {
+        return creditCard;
+    }
+
+    public void setCreditCard(CreditCard creditCard) {
+        this.creditCard = creditCard;
     }
 
     public double getAmount() {
