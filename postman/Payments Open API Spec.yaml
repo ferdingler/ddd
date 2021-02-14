@@ -1,0 +1,91 @@
+openapi: 3.0.0
+info:
+  version: '1'
+  title: Credit Card Payments API
+
+servers:
+  - url: 'http://localhost:3000'
+
+paths:
+  /payments:
+    post:
+      summary: 'Submit a new payment transaction'
+      operationId: submitPayment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubmitPaymentRequest'
+
+      responses:
+        '200':
+          description: 'Information about the payment transaction result'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubmitPaymentResponse'
+    
+  /payments/{transactionId}:
+    get:
+      summary: 'Fetch payment transaction by ID'
+      operationId: getTransactionById
+      parameters:
+        - name: transactionId
+          in: path
+          description: Id of the transaction
+          required: true
+          schema:
+            type: string
+
+      responses:
+        '200':
+          description: 'Information about the payment transaction'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionInformation'
+
+components:
+  schemas:
+    SubmitPaymentRequest:
+      type: object
+      properties:
+        amount:
+          type: number
+        currency:
+          type: string
+        creditCardNumber:
+          type: string
+        creditCardExpiration:
+          type: string
+        creditCardSecurityCode:
+          type: string
+        cardHolderName:
+          type: string
+
+    SubmitPaymentResponse:
+      type: object
+      properties:
+        transactionId:
+          type: string
+
+    TransactionInformation:
+      type: object
+      properties:
+        transactionId:
+          type: string
+        timestamp:
+          type: string
+        amount:
+          type: number
+        currency:
+          type: string
+        creditCardNumber:
+          type: string
+        creditCardExpiration:
+          type: string
+        creditCardSecurityCode:
+          type: string
+        cardHolderName:
+          type: string
+        
