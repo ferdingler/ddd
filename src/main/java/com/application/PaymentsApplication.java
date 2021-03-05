@@ -6,9 +6,12 @@ import javax.inject.Singleton;
 import com.api.SubmitPaymentRequest;
 import com.api.TransactionInfo;
 import com.api.mappers.TransactionMapper;
+import com.domain.model.StolenCreditCardException;
 import com.domain.model.Transaction;
+import com.domain.model.CreditCard;
 import com.domain.model.TransactionFactory;
 import com.domain.model.TransactionRepository;
+import com.domain.services.FraudPreventionService;
 
 /**
  * The PaymentsApplication is part of the application layer and it contains methods
@@ -25,8 +28,17 @@ public class PaymentsApplication {
     @Inject
     private TransactionMapper transactionMapper;
 
-    public String submitPayment(SubmitPaymentRequest paymentRequest) {
+    @Inject
+    private FraudPreventionService fraudPreventionService;
+
+    public String submitPayment(SubmitPaymentRequest paymentRequest) throws StolenCreditCardException {
         Transaction transaction = TransactionFactory.buildTransactionFromPaymentRequest(paymentRequest);
+        
+        CreditCard creditCard = transaction.getCreditCard();
+        if (fraudPreventionService.isCreditCardStolen(creditCard)) {
+            throw new StolenCreditCardException("This credit card has been reported as stolen");
+        }
+
         transactionRepository.saveTransaction(transaction);
         return transaction.getTransactionId();
     }

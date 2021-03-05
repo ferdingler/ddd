@@ -3,12 +3,14 @@ package com.api;
 import javax.inject.Inject;
 
 import com.application.PaymentsApplication;
+import com.domain.model.StolenCreditCardException;
 
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.PathVariable;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.Post;
+import io.micronaut.http.annotation.Error;
 import io.micronaut.http.annotation.Produces;
 
 /**
@@ -29,9 +31,9 @@ public class PaymentsApi {
     private PaymentsApplication paymentsApplication;
 
     @Post(produces = MediaType.APPLICATION_JSON) 
-    public SubmitPaymentResponse submitPayment(SubmitPaymentRequest request) {
+    @Error(exception = StolenCreditCardException.class)
+    public SubmitPaymentResponse submitPayment(SubmitPaymentRequest request) throws StolenCreditCardException {
         String transactionId = paymentsApplication.submitPayment(request);
-        
         SubmitPaymentResponse response = new SubmitPaymentResponse();
         response.setTransactionId(transactionId);
         return response;
